@@ -2,6 +2,17 @@
 This is our Programming foundations project. 
 Project by Martin Merzaie, Balthasar Weber, Aleksandar Filipovic and Noah Kleiner
 
+Defintions:
+Item: Dictionary with 4 key value pairs which are name, quantity, category, packing status. Default item status is unpacked.
+Packing list: A Packing List is a list of dictionaries. It Consists of a certain number of items which are dictionaries. 
+Item Selection: An Item is Selected by Name. 
+Trip: A trip is a combination out of preselected themes (Skiing, beach etc.) and the duration of the trip. The List is preconfigured for every destination, the duration changes the quantity of single items listed. 
+
+Rules for input validation:
+There cant be a negative number of a certain item.
+Duration cant be negative and is the unit is in days.
+
+
 
 User stories with acceptance criteria – Group H;
  Balthasar Weber, Aleksandar Filipovic, Martin Merzaie, Noah Kleiner
@@ -11,6 +22,7 @@ Balz
 1. Add an item
 As a user, I want to add an item to my packing list so that I remember what I need to bring.
 Acceptance Criteria
+Definition of an Item: Dictionary with 4 key value pairs which are name, quantity, category, packing status.
 -The user can enter the name and the quantity of a new item and the item is then added to the packing list.
 - An empty item name returns an error
 - There will be a confirming message once the item has been added successfully.
@@ -39,8 +51,8 @@ Noah
 As a user, I want to see all items so that I know what is on my packing list.
 Acceptance Criteria
  
-- All saved items are displayed with their name and quantity in one view.
-- Quantity, category and packing status are displayed if available.
+- Quantity, category and packing status and name are always displayed.
+- The same rule as the criteria above is for custom items.
 - If the list is empty, the program informs the user.
  
  
@@ -92,7 +104,7 @@ Acceptance Criteria
 Aleks
  
 10. Create a trip
-As a user, I want to create a trip so that I can create a packing list for my journey.
+As a user, I want to be able to choose a trip with different Locations and Durations so that I can create a packing list for my journey. 
 Acceptance Criteria
  
 - The user can create a trip by entering a destination and a trip duration.
