@@ -3,9 +3,9 @@ item_1= {"Name" : "Wallet", "Quantity" : 1, "Category" : "Essential", "Packing S
 item_2= {"Name" : "Beach Towel", "Quantity" : 1, "Category" : "Beach", "Packing Status" : False}
 item_3= {"Name" : "ski-goggles", "Quantity" : 1, "Category" : "Skiing", "Packing Status" : False}
 
-packing_list = [item_1,item_2,item_3, ...]
-packing_list_beach = [item_1,item_2, ...]
-packing_list_skiing = [item_1,item_3, ...]
+packing_list = [item_1,item_2,item_3]
+packing_list_beach = [item_1,item_2]
+packing_list_skiing = [item_1,item_3]
 
 Beach_Trip = {"Location" : "Beach", 
         "Duration" : 0, 
