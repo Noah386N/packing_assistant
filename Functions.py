@@ -24,6 +24,23 @@ def Generate_Trip():
         return"No Predefined Trip exists! / Check your spelling!"
 
 
+def Mark_Item_As_Packed(trip):
+    packing_list = trip["packing_list"]
+    item_name = input("Which item do you want to mark as packed? ")
+
+    found = False
+
+    for item in packing_list:
+        if item["Name"].lower().strip() == item_name.lower().strip():
+            item["Packing Status"] = True
+            found = True
+            print(item["Name"], "has been marked as packed.")
+            break
+
+    if found == False:
+        print("Error: Item does not exist.")
+
+
 selection()
 
 
