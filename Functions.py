@@ -1,6 +1,4 @@
-packing_list_1 = [{"Name" : "Wallet", "Quantity" : 1, "Category" : "Essential", "Packing Status" : False},
-                  {"Name" : "Beach Towel", "Quantity" : 1, "Category" : "Beach", "Packing Status" : False},
-                  {"Name" : "ski-goggles", "Quantity" : 1, "Category" : "Skiing", "Packing Status" : False}]
+packing_list_1 = []
 
 from General_Data import Beach_Trip, Skiing_Trip
 
