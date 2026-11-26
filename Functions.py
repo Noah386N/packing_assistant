@@ -60,6 +60,8 @@ def show_items(trip) :
        print("-----------------------------------------------------------------")
        for item in trip["packing_list"] :
 
+           status = get_status_text(item)
+
            print(
             f"{item['Name']:<20} | "
             f"{item['Quantity']:<10} | "
@@ -106,13 +108,40 @@ def show_unpacked_items(trip):
 
         print("-----------------------------------------------------------------")
 
+def search_item(trip):
 
+    search_name = input("Enter item name: ")
 
+    for item in trip["packing_list"]:
+
+        item_name = item["Name"].lower()
+        search_name_lower = search_name.lower()
+
+        if item_name == search_name_lower:
+
+            status = get_status_text(item)
+
+            print("-----------------------------------------------------------------")
+            print(f"{'Name':<20} | {'Quantity':<10} | {'Category':<15} | {'Status':<10}|")
+            print("-----------------------------------------------------------------")
+
+            print(
+                f"{item['Name']:<20} | "
+                f"{item['Quantity']:<10} | "
+                f"{item['Category']:<15} | "
+                f"{status:<10}|"
+            )
+
+            print("-----------------------------------------------------------------")
+
+            return
+
+    print("Item not found.")
     
 
 
 #Function_1 = selection() #Function 1 = Aktueller Trip, könnten wir umbennennen (Zugriffspunkt für alle Funktionen)
 
-#unction_1 = Generate_Trip() #for testing before menu fix
+Function_1 = Generate_Trip()
 
-#how_unpacked_items(Function_1)
+search_item(Function_1)
