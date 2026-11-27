@@ -206,6 +206,23 @@ def Show_Packing_Progress(trip):
 
     print(packed_items, "of", total_items, "items packed -", str(percentage) + "%")
  
+def add_item():
+    new_item = input("What new item would you like to add? ")
+    new_item_amount = input("How much/many would you like to add? ")
+    if new_item == "" or new_item_amount == "":
+        return("No item definded/no amount specified")
+    else:
+        packing_list_1.append({"Name" : new_item, "Quantity" : int(new_item_amount), "Category" : "undefined", "Packing Status" : False})
+        return(packing_list_1)
+       
+def edit_item():
+    item_choice = input("Choose Item to edit: ")    
+    for items in packing_list_1:
+        if items["Name"].lower().strip() == item_choice.lower().strip():
+            items["Quantity"] = str(input("How much/many do you want/need? "))
+            items["Category"] = input("what is the Item's Category? ")
+            return(packing_list_1)
+    return("Item is not in the packing List")
 
 #Function_1 = selection() #Function 1 = Aktueller Trip, könnten wir umbennennen (Zugriffspunkt für alle Funktionen)
 #function only runs if started in this file
