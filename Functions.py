@@ -60,6 +60,25 @@ def Mark_Item_As_Unpacked(trip):
     if found == False:
         print("Error: Item does not exist.")
 
+#User_story_9
+def Show_Packing_Progress(trip):
+    packing_list = trip["packing_list"]
+
+    if len(packing_list) == 0:
+        print("Error: Packing list is empty.")
+        return
+
+    total_items = len(packing_list)
+    packed_items = 0
+
+    for item in packing_list:
+        if item["Packing Status"] == True:
+            packed_items = packed_items + 1
+
+    percentage = packed_items / total_items * 100
+    percentage = round(percentage)
+
+    print(packed_items, "of", total_items, "items packed -", str(percentage) + "%")
 
 selection()
 
