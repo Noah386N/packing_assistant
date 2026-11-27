@@ -1,5 +1,5 @@
 packing_list_1 = []
-
+list_of_trips = {}
 #importing python math package in order to calculate rounding up/down etc
 import math                                             
 from General_Data import Beach_Trip, Skiing_Trip
@@ -49,6 +49,14 @@ def Generate_Trip():
     return filled_trip
 #Is it possible it runs into an error if you first type in a wrong input so ex. misspelled "Skiing" and then try again? 
 
+def choose_packinglist() : 
+    packinglist_choice = input("Choose packing list: ")    
+    for trips in list_of_trips:
+        if trips["Location"].lower().strip() == packinglist_choice.lower().strip():
+            return trips["packing_list"]
+        else:
+            return("Trip is not defined! / Check your spelling!")
+
 def get_status_text(item) : #Hilfsfunktion, damit wir packing status nicht einfach True oder False haben sondern False = Unpacked True = Packed (Schönere klarere Darstellung)
     if item ["Packing Status"] == True : 
         return "packed"
@@ -79,7 +87,7 @@ def show_items(trip) :
 
                
 def show_unpacked_items(trip):
-
+    
     if len(trip["packing_list"]) == 0:
         print("Packing list is empty.")
 
