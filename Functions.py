@@ -23,7 +23,7 @@ def Generate_Trip():
     else:
         return"No Predefined Trip exists! / Check your spelling!"
 
-
+# User_story_7
 def Mark_Item_As_Packed(trip):
     packing_list = trip["packing_list"]
     item_name = input("Which item do you want to mark as packed? ")
@@ -35,6 +35,26 @@ def Mark_Item_As_Packed(trip):
             item["Packing Status"] = True
             found = True
             print(item["Name"], "has been marked as packed.")
+            break
+
+    if found == False:
+        print("Error: Item does not exist.")
+
+# User_story_8
+def Mark_Item_As_Unpacked(trip):
+    packing_list = trip["packing_list"]
+    item_name = input("Which item do you want to mark as unpacked? ")
+    found = False
+
+    for item in packing_list:
+        if item["Name"].lower().strip() == item_name.lower().strip():
+            found = True
+            if item["Packing Status"] == True:
+                item["Packing Status"] = False
+                print(item["Name"], "has been marked as unpacked.")
+            else:
+                print(item["Name"], "is already unpacked.")
+
             break
 
     if found == False:
