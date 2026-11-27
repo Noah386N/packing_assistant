@@ -11,8 +11,6 @@ Function_1= None #Function_1 = unser aktueller trip, wir müssen Variable schon 
 
 def selection():
     print("1   Generate Trip")
-    print("2 Show Items")
-    print("3 Show unpacked Items")
 
     Choice = int(input("Choose Function "))
     if Choice == 1:
