@@ -1,25 +1,63 @@
 packing_list_1 = []
-list_of_trips = {}
+list_of_trips = []
 #importing python math package in order to calculate rounding up/down etc
 import math                                             
 from General_Data import Beach_Trip, Skiing_Trip
 #importing deepcopy so when creating packing lists the original version isnt changed
 from copy import deepcopy
+import json
 
 #Festlegen des Current trips (trip der durhc selection kreeirt wird, ist immer der current trip, so können wir später evtl. erweitern falls wir mehrere trips haben wollen)
 Function_1= None #Function_1 = unser aktueller trip, wir müssen Variable schon hier definieren, damit man zb Funktion 2 nicht aufrufen kann, ohne das Function_1 etwas enthält (Würde sonst abstürzen weil trip leer = Show Items funktioniert nicht)
 
 def selection():
-    print("1   Generate Trip")
+    global Function_1
+    while True:
+        print("1   Generate Trip")
+        print("2   Save Data")
+        print("3   Load Data")
+        print("0   Exit")
+        choice = input("Choose Function ")
+        if  choice == "1":
+            Function_1 = Generate_Trip()
+            if Function_1 is not None:
+                show_items(Function_1)
+        elif choice == "2":
+            if list_of_trips:
+                Save_Data()
+            else:
+                print("No Data to save. Please Generate a Trip.")
+        elif choice == "3":
+            Load_Data()
+        elif choice == "0":
+            break
+        else:
+            print("not defined")
 
-    Choice = int(input("Choose Function "))
-    if Choice == 1:
-        Function_1 = Generate_Trip()
-        print(Function_1)       #Use loop with f string instead of print so every item gets own line.
-    else:
-        print("not definded")
-        return None
+#User Story 11 - AF
+#Saving the list of generated packing lists
+def Save_Data():
+    with open("list_of_trips.json", "w", encoding="utf-8") as file:
+        json.dump(list_of_trips, file)
+    print("Your list of trips was saved successfully.")
 
+#User Story 12 - AF
+#Loading the saved list of generated packing lists 
+def Load_Data():
+    try:
+        with open("list_of_trips.json", "r", encoding="utf-8") as file:
+            loaded_trips = json.load(file)
+    except FileNotFoundError:
+        print("No saved file found. Please generate a trip.")
+        return
+    except json.JSONDecodeError:
+        print("The save file is empty or damaged and could not be loaded.")
+        return
+    list_of_trips.clear()
+    list_of_trips.extend(loaded_trips)
+    print (len(list_of_trips), "trip(s) loaded.")
+
+#User Story 10 - AF
 #Calculating the amount of items needed for duration
 def calculate_quantity(item, duration):
     if item["Per Day"] is None:
@@ -38,14 +76,27 @@ def fill_packing_list(trip, duration):
 #Generate the trip calling user input and putting it through predefined functions
 def Generate_Trip():
     location = input("Chose your Trip: Beach or Skiing? ")
+    if location.strip() == (""):        #Acceptance Criteria: Empty Destinations are not accepted
+        print("No Trip was entered!")
+        return None
     if location.lower().strip() == "beach":
         chosen_trip = Beach_Trip        
     elif location.lower().strip() == "skiing":
         chosen_trip = Skiing_Trip       
     else:
-        return"No Predefined Trip exists! / Check your spelling!"
-    duration = int(input("How many days is your Trip? "))
+        print("No Predefined Trip exists! / Check your spelling!")
+        return None         #Fixes problem with wrong input
+    while True:         #Acceptance Criteria: Duration must be a positive number (0 or below prevented)
+        try:
+            duration = int(input("How many days is your Trip? "))
+            if duration <= 0:
+                print("Please enter a valid number. ")
+            else:
+                break
+        except ValueError:      #Acceptance Criteria: Duration must be a positive number ("seven" instead of 7 prevented)
+            print("Please enter a valid number. ")
     filled_trip = fill_packing_list(chosen_trip, duration)
+    list_of_trips.append(filled_trip)       #Trip gets added to the list of trips for choose_packinglist choice
     return filled_trip
 #Is it possible it runs into an error if you first type in a wrong input so ex. misspelled "Skiing" and then try again? 
 

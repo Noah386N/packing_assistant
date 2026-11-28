@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project save file
+list_of_trips.json
+
+# Personal test files
+test_AF.py
